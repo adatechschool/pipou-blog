@@ -18,6 +18,8 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /pipou-blog
 
+RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/
 ARG UID=10001

@@ -14,7 +14,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
 
     # Annule le champ par défaut username
-    username = None
+    #username = None
 
     # Indique que le champ email sera utilisé pour  l'authentification
     USERNAME_FIELD = 'email'

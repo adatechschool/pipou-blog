@@ -58,13 +58,66 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pipou_blog.wsgi.application'
 
-# Configuration de la base de données pour les tests - utilise SQLite en mémoire
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
+# Configuration de la base de données pour les tests
+# Utilise la même configuration que l'environnement normal mais avec une base de test
+import os
+import sys
+from urllib.parse import urlparse, parse_qsl
+
+# Fonction pour vérifier si une URL est valide
+def is_valid_db_url(url):
+    try:
+        parsed = urlparse(url)
+        return all([parsed.scheme, parsed.netloc, parsed.hostname])
+    except Exception:
+        return False
+
+# Utiliser SQLite par défaut
+USE_SQLITE = True
+
+# Si DATABASE_URL est définie et semble valide, essayer d'utiliser PostgreSQL/Neon
+db_url = os.getenv("DATABASE_URL")
+if db_url and is_valid_db_url(db_url) and "votre_" not in db_url:
+    try:
+        tmpPostgres = urlparse(db_url)
+        
+        # Ajouter un préfixe 'test_' au nom de la base pour isoler les tests
+        db_name = tmpPostgres.path.replace('/', '')
+        if not db_name.startswith('test_'):
+            db_name = 'test_' + db_name
+        
+        # Tester si la configuration est valide
+        if tmpPostgres.hostname and tmpPostgres.username:
+            USE_SQLITE = False
+            print("Tests exécutés avec PostgreSQL/Neon", file=sys.stderr)
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.postgresql',
+                    'NAME': db_name,
+                    'USER': tmpPostgres.username,
+                    'PASSWORD': tmpPostgres.password,
+                    'HOST': tmpPostgres.hostname,
+                    'PORT': 5432,
+                    'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
+                    'TEST': {
+                        'NAME': db_name,
+                        'SERIALIZE': False,  # Désactiver la sérialisation pour accélérer les tests
+                    },
+                }
+            }
+    except Exception as e:
+        USE_SQLITE = True
+        print(f"Erreur lors de la configuration PostgreSQL: {e}. Utilisation de SQLite.", file=sys.stderr)
+
+# Utiliser SQLite si PostgreSQL n'est pas configuré ou si une erreur s'est produite
+if USE_SQLITE:
+    print("Tests exécutés avec SQLite en mémoire", file=sys.stderr)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
     }
-}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

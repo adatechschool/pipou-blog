@@ -15,18 +15,20 @@ Nous utilisons le framework de test intégré de Django, qui est basé sur `unit
 
 ### Configuration spéciale pour les tests
 
-Pour faciliter l'exécution des tests sans dépendre d'une base de données PostgreSQL, nous avons créé un fichier de configuration spécifique pour les tests :
+Nous avons créé un fichier de configuration spécifique pour les tests qui offre deux options :
 
 - `pipou_blog/pipou_blog/test_settings.py` : Ce fichier contient une configuration Django complète qui :
-  - Utilise SQLite en mémoire au lieu de PostgreSQL
+  - Détecte automatiquement la disponibilité de PostgreSQL/Neon via la variable d'environnement `DATABASE_URL`
+  - Si `DATABASE_URL` est valide, utilise PostgreSQL/Neon avec un préfixe `test_` pour la base de données
+  - Sinon, utilise SQLite en mémoire (plus simple pour le développement local)
   - Désactive les migrations pour accélérer les tests
   - Conserve toutes les autres configurations nécessaires (authentification personnalisée, etc.)
 
 ## 🚀 Exécution des tests localement
 
-### Exécuter les tests de base
+### Exécuter les tests avec SQLite (par défaut)
 
-Pour lancer les tests localement, exécutez la commande suivante depuis le répertoire principal du projet :
+Pour lancer les tests localement avec SQLite (plus simple pour le développement rapide), exécutez :
 
 ```bash
 cd pipou_blog
@@ -34,9 +36,27 @@ python manage.py test blog --settings=pipou_blog.test_settings
 ```
 
 Cette commande :
-- Crée une base de données SQLite en mémoire temporaire
+- Crée automatiquement une base de données SQLite en mémoire temporaire
 - Exécute tous les tests trouvés dans l'application `blog`
-- Utilise les paramètres de test spécifiques qui évitent les problèmes de connexion PostgreSQL
+
+### Exécuter les tests avec PostgreSQL/Neon
+
+Pour exécuter les tests avec votre base de données PostgreSQL/Neon (identique à la production) :
+
+```bash
+# Définir la variable d'environnement DATABASE_URL
+# Sous Windows PowerShell
+$env:DATABASE_URL="postgresql://username:password@hostname:5432/dbname"
+
+# Ou sous Bash/Linux/Mac 
+export DATABASE_URL="postgresql://username:password@hostname:5432/dbname"
+
+# Exécuter les tests avec l'option --keepdb pour éviter les erreurs de suppression de base
+cd pipou_blog
+python manage.py test blog --settings=pipou_blog.test_settings --keepdb
+```
+
+L'option `--keepdb` est importante car elle permet d'éviter les erreurs lors de la tentative de suppression de la base de données de test, qui peut être utilisée par d'autres connexions avec Neon.
 
 ### Mesurer la couverture de code
 
@@ -67,9 +87,19 @@ Nous avons configuré GitHub Actions pour exécuter automatiquement les tests à
 
 1. Configure l'environnement Python
 2. Installe les dépendances du projet
-3. Exécute les tests avec mesure de couverture
-4. Génère un rapport de couverture
-5. Publie le rapport comme un artefact de build
+3. **Utilise la base de données PostgreSQL/Neon** via la variable d'environnement `DATABASE_URL`
+4. Exécute les tests avec mesure de couverture et l'option `--keepdb`
+5. Génère un rapport de couverture
+6. Publie le rapport comme un artefact de build
+
+### Configuration du secret DATABASE_URL
+
+Pour que les tests CI fonctionnent avec PostgreSQL/Neon, vous devez configurer un secret GitHub :
+
+1. Allez dans les paramètres de votre dépôt GitHub
+2. Sélectionnez "Secrets and variables" > "Actions"
+3. Cliquez sur "New repository secret"
+4. Nommez-le `DATABASE_URL` et entrez votre URL de connexion Neon
 
 ### Consulter les résultats des tests CI
 

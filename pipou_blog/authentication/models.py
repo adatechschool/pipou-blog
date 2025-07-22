@@ -19,7 +19,7 @@ class User(AbstractUser):
     # Indique que le champ email sera utilisé pour  l'authentification
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     # Personnalisation de l'affichage dans l'admin 
     class Meta:
@@ -27,4 +27,4 @@ class User(AbstractUser):
         verbose_name_plural = 'Utilisateur-rices'
     
     def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.email})"
+        return f"{self.username} ({self.email})"

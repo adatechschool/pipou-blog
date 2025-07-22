@@ -12,12 +12,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args: 
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
     ports:
       - 8000:8000
     volumes:
       - .:/pipou-blog
     environment:
       - PYTHONUNBUFFERED=1
+    # Utiliser les variables d'environnement si disponibles, sinon les valeurs par défaut
+    user: "${UID:-1000}:${GID:-1000}"
     command: python3 pipou_blog/manage.py runserver 0.0.0.0:8000
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to

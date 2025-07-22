@@ -90,10 +90,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
+
+# Pour gérer les fichiers média (images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Utiliser le modèle utilisateur personnalisé
+AUTH_USER_MODEL = 'authentication.User'
 
 # Désactiver la migration pour les tests pour améliorer la performance
 class DisableMigrations:

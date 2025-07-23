@@ -9,12 +9,10 @@ def login_page(request):
     if request.method == 'POST':
         form = forms.LoginForm(request.POST)
         if form.is_valid():
-            print("form is valid")
             user = authenticate(request, email=form.cleaned_data['email'], password=form.cleaned_data['password'],)
             if user is not None:
-                print("user is not None")
                 login(request, user)
-                message = f'Bonjour, {user.first_name} Vous êtes connecté.'
+                return redirect('index')
             else:
                 message = 'Identifiants invalides.'
 

@@ -58,7 +58,9 @@ ROOT_URLCONF = 'pipou_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR.joinpath('templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,3 +138,12 @@ AUTH_USER_MODEL = 'authentication.User'
 # Pour gérer les fichiers média (images)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+""" AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+] """
+
+AUTHENTICATION_BACKENDS = [
+    'authentication.backends.EmailBackend', 
+]

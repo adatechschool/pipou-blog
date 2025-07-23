@@ -26,5 +26,4 @@ urlpatterns = [
     path('', blog.views.home, name='index'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
-    #path('logout/', authentication.views.logout_user, name='logout'),
 ]

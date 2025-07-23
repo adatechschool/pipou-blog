@@ -1,5 +1,23 @@
 from django import forms
+from django.contrib.auth import authenticate
 
-class LoginForm(forms.Form):
-    email = forms.EmailField(max_length=63, label="Email")
-    password = forms.CharField(max_length=63, widget=forms.PasswordInput, label='Mot de passe')
+class EmailAuthenticationForm(forms.Form):
+    email = forms.EmailField(label="Email", max_length=100)
+    password = forms.CharField(label="Mot de passe", strip=False, widget=forms.PasswordInput)
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+        self.user = None
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+        if email and password:
+            self.user = authenticate(self.request, email=email, password=password)
+            if self.user is None:
+                raise forms.ValidationError("Identifiants invalides.")
+        return self.cleaned_data
+
+    def get_user(self):
+        return self.user

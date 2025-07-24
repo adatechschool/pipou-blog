@@ -1,13 +1,16 @@
-{% extends "base.html" %} {% block title %}
-<title>Accueil de Pipou blog</title>
-{% endblock %} {% block content %}
-{% comment %} <h1>Pipou Blog</h1> {% endcomment %}
-
-{% for post in posts %}
-<article>
-  <h2>{{ post.title }}</h2>
-  <p>Publier le {{ post.created_at|date:"j F Y" }}</p>
-  <p>{{ post.content|safe|truncatewords:50 }}</p>
-  <p>{{ post.user }}</p>
-</article>
-{% endfor %} {% endblock %}
+{% extends "base.html" %} {% block content %}
+<section class="post_view-container">
+  <div class="post_view-content">
+    {% for post in posts %}
+    <article class="post_container">
+      <div class="post_header">
+        <h2>{{ post.title }}</h2>
+        <p>Publier le {{ post.created_at|date:"j F Y" }}</p>
+      </div>
+      <p>{{ post.content|safe|truncatewords:50 }}</p>
+      <p>{{ post.user }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

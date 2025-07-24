@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,14 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pipou Blog 📝</title>
-    <link rel="stylesheet" href="{% static 'css/components/header.css' %}">
-</head>
-<body>
-    {% block header %}
-    {% include "partials/header.html" %}
-    {% endblock %}
-    {% block content %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/components/header.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/post-list.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/components/post-form.css' %}" />
+  </head>
+
+  <body>
+    {% block header %} {% include "partials/header.html" %} {% endblock %}
+
+    <main style="margin-top: 80px">{% block content %}{% endblock %}</main>
     <!-- Scripts -->
     <script src="{% static 'js/header.js' %}"></script>
-</body>
+  </body>
 </html>

@@ -19,19 +19,17 @@
                 {% if user.is_authenticated %}
                     <li><a href="/blog/create/">Nouvel Article</a></li>
                     <li><a href="/authentication/profile/">Profil</a></li>
-                    {% if user.is_authenticated %}
-                        <li>
-                            <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                                {% csrf_token %}
-                                <button type="submit" style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: #007bff; cursor: pointer;">
-                                Déconnexion
-                                </button>
-                            </form>
-                        </li>
-                    {% endif %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="background: none; border: none; padding: 0; margin: 0; font: inherit; color: #007bff; cursor: pointer;">
+                            Déconnexion
+                            </button>
+                        </form>
+                    </li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Connexion</a></li>
-                    {% comment %} <li><a href="{% url 'register' %}">Inscription</a></li> {% endcomment %}
+                    <li><a href="{% url 'register' %}">Inscription</a></li>
                 {% endif %}
             </ul>
         </nav>

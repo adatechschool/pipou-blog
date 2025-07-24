@@ -1,7 +1,11 @@
+  
+    {% load static %}
+
+
 <header class="site-header">
     <div class="container">
         <div class="logo">
-            <a href="/">PipouBlog</a>
+            <a href="/"><img src="{% static 'images/LOGO5.png' %}" alt="Logo"></a>
         </div>
         
         <!-- Menu Burger Icon -->
@@ -18,7 +22,7 @@
                 <li><a href="/">Accueil</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="/blog/create/">Nouvel Article</a></li>
-                    <li><a href="/authentication/profile/">Profil</a></li>
+                    <li><a href="{% url 'profile' user.id %}">Profil</a></li>
                     {% if user.is_authenticated %}
                         <li>
                             <form action="{% url 'logout' %}" method="post" style="display: inline;">

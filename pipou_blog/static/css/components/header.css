@@ -147,3 +147,11 @@ header{
 
 
     
+/* Ajoute une marge en haut du contenu principal pour éviter qu'il soit caché par le header */
+body {
+    padding-top: 100px; /* Ajustez cette valeur si la hauteur du header change */
+}
+
+
+
+    

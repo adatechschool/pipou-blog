@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="profile-container">
+     <div class="profile-picture-container">
+        {% if user_profile.profile_picture %}
+            <img src="{{ user_profile.profile_picture.url }}" alt="Photo de profil" class="profile-picture">
+        {% else %}
+            <img src="{% static 'images/LOGO5.png' %}" alt="Photo de profil" class="profile-picture">
+        {% endif %}
+    </div> 
+
+    <h1>{{ user_profile.username|default:user_profile.email }}</h1>
+    
+    <p><strong>Email :</strong> {{ user_profile.email }}</p>
+    <p><strong>Nom :</strong> {{ user_profile.first_name|default:"Non renseigné" }}</p>
+    <p><strong>Prénom :</strong> {{ user_profile.last_name|default:"Non renseigné" }}</p>
+    <p><strong>Biographie :</strong> {{ user_profile.biography|default:"Aucune biographie." }}</p>
+    <p><small>Membre depuis le {{ user_profile.date_joined|date:"d F Y" }}</small></p>
+
+    {% if user == user_profile %}
+    <div class="profile-actions">
+        <a href="#" class="btn btn-primary">Modifier le profil</a>
+        <a href="#" class="btn btn-danger">Supprimer le compte</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

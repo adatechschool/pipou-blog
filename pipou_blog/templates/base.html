@@ -19,10 +19,12 @@
 
     <main style="margin-top: 80px">{% block content %}{% endblock %}</main>
     
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and request.resolver_match.url_name != 'create' %}
+    
     <a href="{% url 'create' %}" class="floating-create-button" title="Créer un nouveau post">
       <img src="{% static 'images/post.png' %}" alt="Créer un post" />
     </a>
+    
     {% endif %}
     
 

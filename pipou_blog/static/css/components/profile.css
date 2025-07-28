@@ -55,19 +55,11 @@
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background: #8b8080;
     color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background: #686060;
 }
 
-.btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-}

@@ -146,6 +146,7 @@ header {
   font: inherit;
   color: white;
   cursor: pointer;
+  padding: 10px;
 }
 
 .logout-button:hover {

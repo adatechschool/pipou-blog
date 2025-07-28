@@ -37,7 +37,7 @@ jobs:
           cd pipou_blog
           coverage run manage.py test --settings=pipou_blog.test_settings --keepdb
           coverage xml -o ../coverage.xml
-          coverage report
+          coverage report -m
 
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v4

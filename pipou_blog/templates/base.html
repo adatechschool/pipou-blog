@@ -7,17 +7,30 @@
     <title>Pipou Blog 📝</title>
     <link rel="stylesheet" href="{% static 'css/components/header.css' %}" />
     <link rel="stylesheet" href="{% static 'css/components/authentication.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/components/footer.css' %}" />
+
     <link rel="stylesheet" href="{% static 'css/components/profile.css' %}" />
     <link rel="stylesheet" href="{% static 'css/post-list.css' %}" />
     <link rel="stylesheet" href="{% static 'css/components/post-form.css' %}" />
     <link rel="stylesheet" href="{% static 'css/components/editProfil.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/components/floating-button.css' %}" />
   </head>
 
   <body>
     {% block header %} {% include "header.html" %} {% endblock %}
 
     <main style="margin-top: 80px">{% block content %}{% endblock %}</main>
+    
+    {% if user.is_authenticated %}
+    <a href="{% url 'create' %}" class="floating-create-button" title="Créer un nouveau post">
+      <img src="{% static 'images/post.png' %}" alt="Créer un post" />
+    </a>
+    {% endif %}
+    
+
+    {% block footer %} {% include "partials/footer.html" %} {% endblock %}
     <!-- Scripts -->
     <script src="{% static 'js/header.js' %}"></script>
+    <script src="{% static 'js/delete-confirm.js' %}"></script>
   </body>
 </html>

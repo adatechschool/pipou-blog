@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+}
+
+footer {
+  text-align: center;
+  background-color: #8b8080;
+  padding: 14px;
+}
+
+.mentions {
+  display: flex;
+  justify-content: center;
+  gap: 42px;
+}

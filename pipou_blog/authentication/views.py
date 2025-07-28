@@ -16,9 +16,11 @@ def register_page(request):
     form = forms.RegisterForm()
     if request.method == 'POST':
         form = forms.RegisterForm(request.POST)
+
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
-
+    else:
+        form = forms.RegisterForm()
     return render(request, 'authentication/register.html', context={'form': form})

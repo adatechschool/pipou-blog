@@ -29,3 +29,14 @@ class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ('username', 'email', 'first_name', 'last_name')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Rendre first_name et last_name obligatoires
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        
+        # Optionnel : personnaliser les messages d'erreur
+        self.fields['first_name'].error_messages = {'required': 'Ce champ est obligatoire.'}
+        self.fields['last_name'].error_messages = {'required': 'Ce champ est obligatoire.'}

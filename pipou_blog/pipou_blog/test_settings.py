@@ -154,6 +154,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Utiliser le modèle utilisateur personnalisé
 AUTH_USER_MODEL = 'authentication.User'
 
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'login'
+
 # Désactiver la migration pour les tests pour améliorer la performance
 class DisableMigrations:
     def __contains__(self, item):

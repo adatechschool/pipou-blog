@@ -1,8 +1,11 @@
 from django.test import TestCase, Client
 from authentication.models import *
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.conf import settings
 from authentication.forms import RegisterForm
+
+User = get_user_model()
 
 
 class RegisterViewTest(TestCase):
@@ -23,11 +26,20 @@ class RegisterViewTest(TestCase):
         }
         
         # Données de test invalides
-        self.invalid_user_data = {
+        self.invalid_email_data = {
             'username': 'baduser',
             'first_name': 'Bad',
             'last_name' : 'User',
             'email': 'invalid-email',  
+            'password1': 'testpassword123',
+            'password2': 'testpassword123', 
+        }
+
+        self.invalid_password_data = {
+            'username': 'baduser',
+            'first_name': 'Bad',
+            'last_name' : 'User',
+            'email': 'baduser@test.fr',  
             'password1': 'testpassword123',
             'password2': 'differentpassword', 
         }
@@ -48,8 +60,9 @@ class RegisterViewTest(TestCase):
 
         initial_user_count = User.objects.count()
         response = self.client.post(self.register_url, self.valid_user_data)
-    
-        self.assertRedirects(response, settings.LOGIN_REDIRECT_URL)
+
+        expected_url = reverse(settings.LOGIN_REDIRECT_URL)
+        self.assertRedirects(response, expected_url)
         self.assertEqual(response.status_code, 302)  # Redirection après succès
         self.assertEqual(User.objects.count(), initial_user_count + 1)
     
@@ -60,18 +73,37 @@ class RegisterViewTest(TestCase):
         self.assertTrue('_auth_user_id' in self.client.session)
 
 
-    def test_register_page_post_invalid_data(self):
-        # On teste l'inscription avec des données invalides
+    def test_register_page_post_invalid_email(self):
+        # On teste l'inscription avec un email invalide
 
         initial_user_count = User.objects.count()
-        response = self.client.post(self.register_url, self.invalid_user_data)
+        response = self.client.post(self.register_url, self.invalid_email_data)
     
         self.assertEqual(response.status_code, 200)  # Reste sur la même page
         self.assertTemplateUsed(response, 'authentication/register.html')
 
         self.assertEqual(User.objects.count(), initial_user_count)
-        self.assertFormError(response, 'form', 'email', 'Saisissez une adresse de courriel valide.')
+        print(response.context['form'].errors)
+        self.assertIn('email', response.context['form'].errors)
+        self.assertIn('Saisissez une adresse de courriel valide.', response.context['form'].errors['email'])
         self.assertFalse('_auth_user_id' in self.client.session)
+
+
+    def test_register_page_post_invalid_password(self):
+        # On teste l'inscription avec un password invalide
+
+        initial_user_count = User.objects.count()
+        response = self.client.post(self.register_url, self.invalid_password_data)
+    
+        self.assertEqual(response.status_code, 200)  # Reste sur la même page
+        self.assertTemplateUsed(response, 'authentication/register.html')
+
+        self.assertEqual(User.objects.count(), initial_user_count)
+        print(response.context['form'].errors)
+        self.assertIn('password2', response.context['form'].errors)
+        self.assertIn('Les deux mots de passe ne correspondent pas.', response.context['form'].errors['password2'])
+        self.assertFalse('_auth_user_id' in self.client.session)
+
 
     def test_register_page_duplicate_email(self):
         #On teste l'inscription avec un utilisateur existant
@@ -87,13 +119,30 @@ class RegisterViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(User.objects.filter(email='valentinb@test.fr').count(), 1)
 
-
     def test_register_page_post_empty_data(self):
         # On teste l'inscription avec des données vides
 
         response = self.client.post(self.register_url, {})
-    
+        
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, 'form', 'username', 'Ce champ est obligatoire.')
-        self.assertFormError(response, 'form', 'email', 'Ce champ est obligatoire.')
+        self.assertEqual(User.objects.count(), 0)
+        self.assertTemplateUsed(response, 'authentication/register.html')
 
+        form = response.context['form']
+        self.assertFalse(form.is_valid())
+
+        # Debug : afficher les erreurs réelles
+        #print(f"Erreurs réelles du formulaire: {dict(form.errors)}")
+        
+        expected_required_fields = [
+            'email',        
+            'username',     
+            'first_name',   
+            'last_name',    
+            'password1',    
+            'password2',    
+        ]
+    
+        # Vérifier que chaque champ obligatoire a une erreur
+        for field in expected_required_fields:            
+            self.assertIn(field, form.errors)

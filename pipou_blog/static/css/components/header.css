@@ -137,6 +137,16 @@ header {
   transform: rotate(-45deg);
 }
 
+
+.logout-button{
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: #ffffff;
+  cursor: pointer;
+}
 /* Ajoute une marge en haut du contenu principal pour éviter qu'il soit caché par le header */
 body {
   padding-top: 30px; /* Ajustez cette valeur si la hauteur du header change */

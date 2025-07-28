@@ -68,10 +68,10 @@ services:
       - POSTGRES_DB=pipoubdd
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=pipou
-    ports:
-      - 5432:5432
-    # expose:
-    #   - 5432
+    # ports:
+    #   - 5432:5432
+    expose:
+      - 5432
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U pipou -d pipoubdd"]
       interval: 10s

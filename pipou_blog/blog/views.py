@@ -2,7 +2,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from blog.models import Post
-from django import forms
+from django.shortcuts import redirect
 
 class BlogHome(ListView):
     model = Post
@@ -34,3 +34,6 @@ class BlogPostDelete(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return Post.objects.filter(user=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        return redirect("index")

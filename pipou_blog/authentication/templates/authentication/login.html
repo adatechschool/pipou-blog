@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Se connecter</h1>
+    <!-- <h1>Se connecter</h1>
     <p>{{ message }}</p>
     <form method="post">
         {{ form.as_p }}
@@ -9,4 +9,29 @@
         <button type="submit" >Se connecter</button>
     </form>
     <p>Pas encore de compte ? <a href="{% url 'register' %}">S'inscrire</a></p>
+ -->
+    <section class="connexion-container">
+        <h1>Se connecter</h1>
+
+        <form method="POST" class="connexion-form">
+            {% csrf_token %}
+            <div class="connexion_input">
+                {{ form.email.label}} {{ form.email }} 
+                {% if form.email.errors %}
+                <div class="error">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="connexion_input">
+                {{ form.password.label }} {{ form.password }} 
+                {% if form.password.errors %}
+                <div class="error">{{ form.password.errors }}</div>
+                {% endif %}
+            </div>
+            <input type="submit" value="Se Connecter" class="submit_btn" />
+        </form>
+
+        <p>Pas encore de compte ? <a href="{% url 'register' %}">S'inscrire</a></p>
+    </section>
+
+
 {% endblock %}

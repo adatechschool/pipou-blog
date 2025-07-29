@@ -2,13 +2,13 @@
 <section class="post_view-container">
   <div class="post_view-content">
     {% for post in posts %}
-    <a href="/blog/{{ post.id }}" class="link">
-      <article class="post_container">
+    <a class="post_container" href="/blog/{{ post.id }}">
+      <article class="article">
         <div class="post_header">
           <h2>{{ post.title }}</h2>
           <p>Publié le {{ post.created_at|date:"j F Y" }}</p>
         </div>
-        <p>{{ post.content|safe|truncatewords:50 }}</p>
+        <p>{{ post.content|safe|truncatewords:20 }}</p>
         <p>{{ post.user }}</p>
       </article>
     </a>

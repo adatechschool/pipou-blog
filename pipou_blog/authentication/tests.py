@@ -112,8 +112,7 @@ class RegisterViewTest(TestCase):
             username='existing_user',
             email='valentinb@test.fr',
             password='password123'
-        )
-    
+        )    
         response = self.client.post(self.register_url, self.valid_user_data)
 
         self.assertEqual(response.status_code, 200)
@@ -130,9 +129,6 @@ class RegisterViewTest(TestCase):
 
         form = response.context['form']
         self.assertFalse(form.is_valid())
-
-        # Debug : afficher les erreurs réelles
-        #print(f"Erreurs réelles du formulaire: {dict(form.errors)}")
         
         expected_required_fields = [
             'email',        

@@ -1,6 +1,7 @@
 # Guide d'Installation et de Configuration - PipouBlog 📝
 
 ## Prérequis
+
 Avant de commencer, assurez-vous que votre machine répond aux exigences suivantes :
 
 - **Système d'exploitation** : Windows, macOS ou Linux
@@ -9,7 +10,7 @@ Avant de commencer, assurez-vous que votre machine répond aux exigences suivant
 - **Git** : Pour cloner le projet
 - **Docker** : (Optionnel) Pour utiliser l'environnement containerisé
 
-## Étape 1 : 📚 Cloner le Projet 
+## Étape 1 : 📚 Cloner le Projet
 
 1. **Ouvrir un terminal** : Sur votre machine, ouvrez un terminal ou une invite de commande.
 
@@ -31,11 +32,13 @@ python -m venv .venv
 2. **Activer l'environnement virtuel** :
 
 **Sur Windows :**
+
 ```bash
 .venv\Scripts\activate
 ```
 
 **Sur macOS/Linux :**
+
 ```bash
 source .venv/bin/activate
 ```
@@ -49,11 +52,11 @@ pip install -r requirements.txt
 ```
 
 **Dépendances principales :**
+
 - Django 5.2.4
 - psycopg (PostgreSQL adapter)
 - Pillow (gestion d'images)
 - python-dotenv (variables d'environnement)
-- pytest (tests)
 
 ## Étape 4 : 🗃️ Configurer la Base de Données
 
@@ -161,8 +164,6 @@ Le projet inclut une suite de tests complète :
 # Tests avec coverage
 python manage.py test --settings=pipou_blog.test_settings
 
-# Ou avec pytest
-pytest --cov=. --cov-report=html
 ```
 
 **Note :** Consultez `README.Test.md` pour plus de détails sur les tests.

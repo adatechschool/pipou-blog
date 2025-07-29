@@ -4,7 +4,11 @@
   align-items: center;
   gap: 2.5rem;
   padding: 1.5rem 1rem;
-  min-height: 100vh;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
 }
 
 .post_view-content {

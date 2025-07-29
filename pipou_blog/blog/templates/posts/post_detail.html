@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<section class="post_detail-container">
+  <article class="detail-container">
+    <div class="detail-header">
+      <h2 class="detail-title">{{ post.title }}</h2>
+      <span class="detail-date"
+        >Publié le {{ post.created_at|date:"j F Y" }}</span
+      >
+    </div>
+    <div class="detail-content">
+      <p>{{ post.content|safe }}</p>
+    </div>
+    <div class="detail-author">
+      <p>Par <strong>{{ post.user }}</strong></p>
+    </div>
+  </article>
+</section>
+{% endblock %}

@@ -2,14 +2,16 @@
 <section class="post_view-container">
   <div class="post_view-content">
     {% for post in posts %}
-    <article class="post_container">
-      <div class="post_header">
-        <h2>{{ post.title }}</h2>
-        <p>Publié le {{ post.created_at|date:"j F Y" }}</p>
-      </div>
-      <p>{{ post.content|safe|truncatewords:50 }}</p>
-      <p>{{ post.user }}</p>
-    </article>
+    <a href="/blog/{{ post.id }}" class="link">
+      <article class="post_container">
+        <div class="post_header">
+          <h2>{{ post.title }}</h2>
+          <p>Publié le {{ post.created_at|date:"j F Y" }}</p>
+        </div>
+        <p>{{ post.content|safe|truncatewords:50 }}</p>
+        <p>{{ post.user }}</p>
+      </article>
+    </a>
     {% endfor %}
   </div>
 </section>

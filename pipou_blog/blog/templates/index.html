@@ -9,7 +9,7 @@
           <p>Publié le {{ post.created_at|date:"j F Y" }}</p>
         </div>
         <p>{{ post.content|safe|truncatewords:20 }}</p>
-        <p>{{ post.user }}</p>
+        <p>{{ post.user.username }}</p>
 
       <!-- Section des likes -->
       <div class="post_actions">

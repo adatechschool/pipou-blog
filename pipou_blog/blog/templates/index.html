@@ -9,8 +9,105 @@
       </div>
       <p>{{ post.content|safe|truncatewords:50 }}</p>
       <p>{{ post.user }}</p>
+      
+      <!-- Section des likes -->
+      <div class="post_actions">
+        {% if user.is_authenticated %}
+          <button class="like-btn" data-post-id="{{ post.id }}" data-liked="false">
+            <span class="like-icon">🤍</span>
+            <span class="like-count">{{ post.get_likes_count }}</span>
+          </button>
+        {% else %}
+          <span class="like-display">
+            <span class="like-icon">🤍</span>
+            <span class="like-count">{{ post.get_likes_count }}</span>
+          </span>
+        {% endif %}
+      </div>
     </article>
     {% endfor %}
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const likeButtons = document.querySelectorAll('.like-btn');
+    
+    // Charger l'état initial des likes pour chaque bouton
+    likeButtons.forEach(button => {
+        const postId = button.dataset.postId;
+        
+        // Récupérer l'état initial
+        fetch(`/blog/like-status/${postId}/`, {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => {
+                const icon = button.querySelector('.like-icon');
+                const count = button.querySelector('.like-count');
+                
+                if (data.liked) {
+                    icon.textContent = '💙';
+                    button.dataset.liked = 'true';
+                } else {
+                    icon.textContent = '🤍';
+                    button.dataset.liked = 'false';
+                }
+                count.textContent = data.likes_count;
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement de l\'état des likes:', error);
+            });
+        
+        // Gérer les clics
+        button.addEventListener('click', function() {
+            const postId = this.dataset.postId;
+            
+            fetch(`/blog/like/${postId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Mettre à jour l'icône
+                const icon = this.querySelector('.like-icon');
+                const count = this.querySelector('.like-count');
+                
+                if (data.liked) {
+                    icon.textContent = '💙';
+                    this.dataset.liked = 'true';
+                } else {
+                    icon.textContent = '🤍';
+                    this.dataset.liked = 'false';
+                }
+                
+                // Mettre à jour le compteur
+                count.textContent = data.likes_count;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        });
+    });
+});
+
+// Fonction pour récupérer le token CSRF
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
 {% endblock %}

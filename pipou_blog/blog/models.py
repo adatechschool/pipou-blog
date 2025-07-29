@@ -15,3 +15,27 @@ class Post(models.Model):
 
   def __str__(self):
     return self.title
+
+  def get_likes_count(self):
+    """Retourne le nombre total de likes pour ce post"""
+    return self.likes.count()
+
+  def is_liked_by_user(self, user):
+    """Vérifie si un utilisateur a liké ce post"""
+    if user.is_authenticated:
+      return self.likes.filter(user=user).exists()
+    return False
+
+
+class Like(models.Model):
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+  post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+  created_at = models.DateTimeField(auto_now_add=True)
+  
+  class Meta:
+    verbose_name = 'Like'
+    verbose_name_plural = 'Likes'
+    unique_together = ('user', 'post')
+    
+  def __str__(self):
+    return f"{self.user} a liké {self.post.title}"

@@ -48,7 +48,7 @@
 
 .connexion_input input:focus,
 .connexion_textarea textarea:focus {
-  border-color: #8b8080;
+  border-color: #554e4e;
   outline: none;
 }
 
@@ -60,7 +60,7 @@
 .connexion-form .submit_btn input,
 .connexion-form input[type="submit"] {
   padding: 0.6rem 1.2rem;
-  background: #8b8080;
+  background: #554e4e;
   color: #fff;
   border: none;
   border-radius: 0.5rem;
@@ -74,8 +74,6 @@
 .connexion-form input[type="submit"]:hover {
   background: #686060;
 }
-
-
 
 
 

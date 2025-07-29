@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from blog.models import Post, Like
@@ -11,6 +11,11 @@ class BlogHome(ListView):
     model = Post
     context_object_name = "posts"
     template_name = "index.html"
+
+class BlogPostDetail(DetailView):
+    model = Post
+    context_object_name = "post"
+    template_name = "posts/post_detail.html"
 
 class BlogPostCreate(LoginRequiredMixin, CreateView):
     model = Post

@@ -17,6 +17,16 @@ class BlogViewTests(TestCase):
     self.assertTemplateUsed(response, "index.html")
     self.assertIn(self.post, response.context["posts"])
 
+  def test_blog_post_detail_view(self):
+    response = self.client.get(reverse("post_detail", args=[self.post.pk]))
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(response, "posts/post_detail.html")
+    self.assertEqual(response.context["post"], self.post)
+
+  def test_blog_post_detail_view_404(self):
+    response = self.client.get(reverse("post_detail", args=[9999]))
+    self.assertEqual(response.status_code, 404)
+
   def test_blog_post_create_view_authenticated(self):
     self.client.login(email="testuser@gmail.com", password="testpass")
     response = self.client.post(reverse("create"), {

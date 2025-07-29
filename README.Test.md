@@ -32,10 +32,11 @@ Pour lancer les tests localement avec SQLite (plus simple pour le développement
 
 ```bash
 cd pipou_blog
-python manage.py test blog --settings=pipou_blog.test_settings
+python manage.py test --settings=pipou_blog.test_settings
 ```
 
 Cette commande :
+
 - Crée automatiquement une base de données SQLite en mémoire temporaire
 - Exécute tous les tests trouvés dans l'application `blog`
 
@@ -48,7 +49,7 @@ Pour exécuter les tests avec votre base de données PostgreSQL/Neon (identique 
 # Sous Windows PowerShell
 $env:DATABASE_URL="postgresql://username:password@hostname:5432/dbname"
 
-# Ou sous Bash/Linux/Mac 
+# Ou sous Bash/Linux/Mac
 export DATABASE_URL="postgresql://username:password@hostname:5432/dbname"
 
 # Exécuter les tests avec l'option --keepdb pour éviter les erreurs de suppression de base
@@ -63,20 +64,24 @@ L'option `--keepdb` est importante car elle permet d'éviter les erreurs lors de
 Pour mesurer la couverture de code, nous utilisons l'outil `coverage` :
 
 1. Exécuter les tests avec mesure de couverture :
+
 ```bash
 cd pipou_blog
-coverage run manage.py test blog --settings=pipou_blog.test_settings
+coverage run manage.py test --settings=pipou_blog.test_settings
 ```
 
 2. Afficher le rapport de couverture en console :
+
 ```bash
 coverage report
 ```
 
 3. Générer un rapport HTML interactif (plus détaillé) :
+
 ```bash
 coverage html
 ```
+
 Puis ouvrez le fichier `htmlcov/index.html` dans votre navigateur.
 
 ## 🔄 Intégration Continue (CI)
@@ -104,6 +109,7 @@ Pour que les tests CI fonctionnent avec PostgreSQL/Neon, vous devez configurer u
 ### Consulter les résultats des tests CI
 
 Après chaque exécution du workflow GitHub Actions :
+
 1. Allez dans l'onglet "Actions" du dépôt GitHub
 2. Sélectionnez l'exécution de workflow que vous souhaitez consulter
 3. Dans la section "Artifacts", vous pouvez télécharger le rapport de couverture XML
@@ -122,7 +128,7 @@ class VotreTestCase(TestCase):
     def setUp(self):
         # Code exécuté avant chaque test
         pass
-        
+
     def test_exemple(self):
         # Votre test ici
         response = self.client.get(reverse('nom-de-la-vue'))
@@ -155,5 +161,3 @@ class VotreTestCase(TestCase):
 4. **Tests de performance** pour vérifier la rapidité de l'application sous charge
 
 ---
-
-N'hésitez pas à enrichir cette documentation au fur et à mesure que vous ajoutez de nouveaux tests ou que vous améliorez la configuration de test.

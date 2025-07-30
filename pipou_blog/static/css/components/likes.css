@@ -21,7 +21,7 @@
 }
 
 .like-btn:hover {
-  background-color: #f5f5f5;
+  background-color: var(--background-like-hover);
   transform: scale(1.05);
 }
 

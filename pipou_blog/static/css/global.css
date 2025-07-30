@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   padding-top: 30px; /* Ajustez cette valeur si la hauteur du header change */
+  color: var(--text-color-black) 
 }
 
 main{

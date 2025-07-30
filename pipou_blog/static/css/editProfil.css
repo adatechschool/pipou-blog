@@ -6,8 +6,8 @@
 
 .btn-remove-account{
   padding: 0.6rem ;
-  background: #ac7e7e;
-  color: #fff;
+  background: var(--background-remove-button);
+  color: var(--text-color-white);
   border: none;
   border-radius: 0.5rem;
   font-size: 0.8rem;
@@ -18,7 +18,7 @@
 }
 
 .btn-remove-account:hover{
-  background: #7b4848;
+  background: var(--background-remove-button-hover);
 }
 
 .title_profile_picture{

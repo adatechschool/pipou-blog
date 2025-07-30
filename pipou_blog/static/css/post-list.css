@@ -18,13 +18,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: var(--background-color-white);
   box-shadow: 0 7px 29px 0 rgba(100, 100, 111, 0.2);
   border-radius: 1.25rem;
   padding: 1rem;
   font-family: sans-serif;
   text-decoration: none;
-  color: black;
+  color: var(--text-color-black);
   transition: box-shadow 0.2s;
 }
 
@@ -63,9 +63,12 @@
   display: flex;
   padding: 4px;
   border-radius: 8px;
-  background-color: orange;
+  background-color: var(--background-menu);
 }
 
+.update:hover{
+  background-color: var(--main-color-hover);
+}
 .submit-btn-trash {
   background: none;
   padding: 0;
@@ -78,7 +81,11 @@
 .trash {
   padding: 4px;
   border-radius: 8px;
-  background-color: red;
+  background-color: var(--background-remove-button);
+}
+
+.trash:hover{
+  background-color: var(--background-remove-button-hover);
 }
 
 @media (min-width: 600px) {

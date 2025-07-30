@@ -19,7 +19,7 @@
   width: 100%;
   max-width: 500px;
   padding: 1.5rem 1rem;
-  background: #fff;
+  background: var(--background-color-white);
   border-radius: 1rem;
   box-shadow: 0 4px 16px 0 rgba(100, 100, 111, 0.12);
 }
@@ -43,7 +43,7 @@
 .profil_textarea label {
   font-weight: 500;
   font-size: 1rem;
-  color: #222;
+  color: var(--text-color-black);
 }
 
 .post_input input,
@@ -58,7 +58,7 @@
   font-size: 1rem;
   font-family: sans-serif;
   resize: vertical;
-  background: #fafbfc;
+  background: var(--background-input);
   transition: border-color 0.2s;
 }
 
@@ -85,8 +85,8 @@
 .connexion-form input[type="submit"],
 .submit_btn, .new-image-container input[type="file"] {
   padding: 0.6rem 1.2rem;
-  background: #554e4e;
-  color: #fff;
+  background: var(--main-color);
+  color: var(--text-color-white);
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -100,7 +100,7 @@
 .connexion-form .submit_btn input:hover,
 .connexion-form input[type="submit"]:hover,
 .submit_btn:hover, .new-image-container input[type="file"]:hover {
-  background: #686060;
+  background: var(--main-color-hover);
 }
 
 

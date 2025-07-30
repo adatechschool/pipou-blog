@@ -21,26 +21,26 @@
 
 .detail-title {
   font-size: 2rem;
-  color: #222;
+  color: var(--text-color-black);
   margin: 0;
   word-break: break-word;
 }
 
 .detail-date {
   font-size: 1rem;
-  color: #888;
+  color: var(--text-color-detail-date);
   white-space: nowrap;
 }
 
 .detail-content {
   font-size: 1.15rem;
-  color: #333;
+  color: var(--text-color-black);
   margin-bottom: 1.5rem;
 }
 
 .detail-author {
   text-align: right;
-  color: #666;
+  color: var(--text-color-detail-author);
   font-size: 1rem;
 }
 

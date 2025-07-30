@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 
 header {
-  background-color: #554e4e;
-  color: #fff;
+  background-color: var(--main-color);
+  color: var(--text-color-white);
   padding: 1rem;
 }
 
@@ -25,7 +25,7 @@ header {
 
 /* Logo styles */
 .logo a {
-  color: #fff;
+  color: var(--text-color-white);
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -34,7 +34,7 @@ header {
 /* Tagline style */
 
 .tag-line{
-  color:white;
+  color:var(--text-color-white);
   font-family: "Special Gothic Expanded One";
   font-weight: 300;
   font-size: 1.3rem ;
@@ -48,7 +48,7 @@ header {
   height: auto; /* Hauteur automatique au lieu de 100vh */
   max-height: 80vh; /* Hauteur maximale */
   overflow-y: auto; /* Défilement si nécessaire */
-  background-color: #b5acac;
+  background-color: var(--background-menu);
   z-index: 100;
   transform: scaleY(0); /* Caché par défaut */
   transform-origin: top right; /* Animation à partir du coin supérieur droit */
@@ -81,7 +81,7 @@ header {
 }
 
 .main-nav a {
-  color: #1f1e1e;
+  color: var(--text-color-menu);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s;
@@ -89,8 +89,9 @@ header {
   display: block;
 }
 
-.main-nav a:hover {
-  color: #e3e3e3;
+.main-nav a:hover,
+ .logout-button:hover {
+  color: var(--text-color-menu-hover);
 }
 
 .burger-menu {
@@ -111,7 +112,7 @@ header {
   position: absolute;
   height: 3px;
   width: 100%;
-  background: white;
+  background: var(--text-color-white);
   border-radius: 3px;
   opacity: 1;
   left: 0;
@@ -154,14 +155,14 @@ header {
   padding: 0;
   margin: 0;
   font: inherit;
-  color: #1f1e1e;
+  color:var(--text-color-menu);
   cursor: pointer;
   padding: 10px;
 }
 
-.logout-button:hover {
+/* .logout-button:hover {
   color: #e3e3e3;
-}
+}*/
 
 @media screen and (max-width: 768px) {
   .tag-line {

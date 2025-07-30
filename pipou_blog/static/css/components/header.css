@@ -162,10 +162,6 @@ header {
 .logout-button:hover {
   color: #e3e3e3;
 }
-/* Ajoute une marge en haut du contenu principal pour éviter qu'il soit caché par le header */
-body {
-  padding-top: 30px; /* Ajustez cette valeur si la hauteur du header change */
-}
 
 @media screen and (max-width: 768px) {
   .tag-line {

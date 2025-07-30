@@ -3,7 +3,7 @@
 <header class="site-header">
   <div class="container">
     <div class="logo">
-      <a href="/"><img src="{% static 'images/LOGO7.png' %}" alt="Logo" width="80" height="80" /></a>
+      <a href="/"><img src="{% static 'images/LOGO7.png' %}" alt="LogoPipou" width="80" height="80" /></a>
     </div>
     <h1 class="tag-line">Pas de pipeau, que du pipou!</h1>
     <!-- Menu Burger Icon -->
@@ -17,7 +17,7 @@
       <!-- Navigation -->
       <nav class="main-nav">
         <ul>
-          <li><a href="/">Accueil</a></li>
+          <li><a href="/" alt="Accueil">Accueil</a></li>
           {% if user.is_authenticated %}
           <li><a href="/blog/create/">Nouvel Article</a></li>
           <li><a href="{% url 'profile' user.id %}">Profil</a></li>

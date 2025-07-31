@@ -24,8 +24,8 @@ Pour des informations détaillées, consultez les notices suivantes :
 
 Clonez le dépôt et accédez au répertoire du projet :
 
-``` git clone git@github.com:adatechschool/pipou-blog.git ```
-``` cd PipouBlog/pipou-blog ```
+``` git clone git@github.com:adatechschool/pipou-blog.git ```</br>
+<code> cd PipouBlog/pipou-blog </code>
 
 
 
@@ -89,17 +89,17 @@ Le projet inclut une suite de tests automatisés avec une couverture de 96%. Pou
 
 -- Structure du projet
 
-pipou-blog/
-├── pipou_blog/           # Configuration Django
-├── blog/                 # Application blog
-├── authentication/       # Application authentification
-├── user_profile/         # Application profils utilisateur
-├── static/               # Fichiers statiques (CSS, JS, images)
-├── templates/            # Templates HTML
-├── fixtures/             # Données de démonstration
-├── requirements.txt      # Dépendances Python
-├── compose.yaml          # Configuration Docker
-└── manage.py             # Script de gestion Django
+pipou-blog/</br>
+├── pipou_blog/           # Configuration Django</br>
+├── blog/                 # Application blog</br>
+├── authentication/       # Application authentification</br>
+├── user_profile/         # Application profils utilisateur</br>
+├── static/               # Fichiers statiques (CSS, JS, images)</br>
+├── templates/            # Templates HTML</br>
+├── fixtures/             # Données de démonstration</br>
+├── requirements.txt      # Dépendances Python</br>
+├── compose.yaml          # Configuration Docker</br>
+└── manage.py             # Script de gestion Django</br>
 
 -- Fonctionnalités principales --
 

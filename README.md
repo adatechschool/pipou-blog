@@ -1,4 +1,4 @@
-                                  -*  PipouBlog *-
+                                                   -*  PipouBlog *-
 
 -- Description --
 

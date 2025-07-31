@@ -1,4 +1,4 @@
-                                  -*  <b> PipouBlog </b> *-
+                                  -  <b>PipouBlog</b> -
 
 -- Description --
 

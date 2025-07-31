@@ -13,7 +13,7 @@
       <p>{{ post.content|safe }}</p>
     </div>
     <div class="detail-author">
-      <p>Par <strong>{{ post.user.username }}</strong></p>
+      <p>Par <a class="link" href="{% url 'profile' post.user.id %}">{{ post.user.username }}</a></p>
     </div>
     <div class="detail-like-user">
       <p>
@@ -31,7 +31,7 @@
           {% else %}
           <img src="{% static 'images/LOGO5.png' %}" alt="Default Avatar" class="like-user-avatar height="30" width="30">
           {% endif %}
-          <span>{{ like.user.username }}</span>
+          <span><a class="link" href="{% url 'profile' like.user.id %}">{{ like.user.username }}</a></span>
         </li>
         {% empty %}
         <li>Aucun utilisateur n'a aimé ce post.</li>

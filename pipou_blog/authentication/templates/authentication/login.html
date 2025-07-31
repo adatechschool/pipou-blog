@@ -14,13 +14,13 @@
         <form method="POST" class="connexion-form">
             {% csrf_token %}
             <div class="connexion_input">
-                {{ form.email.label}} {{ form.email }} 
+                {{ form.email.label}} {{ form.email }}
                 {% if form.email.errors %}
                 <div class="error">{{ form.email.errors }}</div>
                 {% endif %}
             </div>
             <div class="connexion_input">
-                {{ form.password.label }} {{ form.password }} 
+                {{ form.password.label }} {{ form.password }}
                 {% if form.password.errors %}
                 <div class="error">{{ form.password.errors }}</div>
                 {% endif %}
@@ -28,7 +28,7 @@
             <input type="submit" value="Se Connecter" class="submit_btn" />
         </form>
 
-        <p>Pas encore de compte ? <a href="{% url 'register' %}">S'inscrire</a></p>
+        <p>Pas encore de compte ? <a class="link" href="{% url 'register' %}">S'inscrire</a></p>
     </section>
 
 

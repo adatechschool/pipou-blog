@@ -28,44 +28,43 @@
 <section class="post_view-container">
   <div class="post_view-content">
     {% if user_posts %} {% for post in user_posts %}
-    <article class="post_container">
-      <div class="post_header">
-        <h2>{{ post.title }}</h2>
-        <p>Publié le {{ post.created_at|date:"j F Y" }}</p>
-      </div>
-      <p>{{ post.content|safe|truncatewords:20 }}</p>
-      <div class="post_content">
-        <p>{{ post.user.username }}</p>
-        <div class="post_icons">
-          <div class="post_icons">
-            <a href="/blog/edit/{{ post.id }}">
-              <img class="update" src="{% static 'images/icons/update.svg' %}" alt="update icon" width="24">
-            </a>
-            <form method="POST" action="/blog/delete/{{ post.id }}" style="display:inline;" class="delete-form">
-              {% csrf_token %}
-              <button class="submit-btn-trash" type="submit" title="Supprimer">
-                <img class="trash" src="{% static 'images/icons/trash.svg' %}" alt="trash icon" width="24">
-              </button>
-            </form>
-          </div>
+      <article class="post_container" data-href="/blog/{{ post.id }}">
+        <div class="post_header">
+          <h2>{{ post.title }}</h2>
+          <p>Publié le {{ post.created_at|date:"j F Y" }}</p>
         </div>
-      
-      </div>
-         <!-- Section des likes -->
-      <div class="post_actions">
-        {% if user.is_authenticated %}
-          <button class="like-btn" data-post-id="{{ post.id }}" data-liked="false">
-            <span class="like-icon">🤍</span>
-            <span class="like-count">{{ post.get_likes_count }}</span>
-          </button>
-        {% else %}
-          <span class="like-display">
-            <span class="like-icon">🤍</span>
-            <span class="like-count">{{ post.get_likes_count }}</span>
-          </span>
-        {% endif %}
-      </div>
-    </article>
+        <p>{{ post.content|safe|truncatewords:20 }}</p>
+        <div class="post_content">
+          <p>{{ post.user.username }}</p>
+          {% if user == user_profile %}
+            <div class="post_icons">
+              <a href="/blog/edit/{{ post.id }}">
+                <img class="update" src="{% static 'images/icons/update.svg' %}" alt="update icon" width="24">
+              </a>
+              <form method="POST" action="/blog/delete/{{ post.id }}" style="display:inline;" class="delete-form">
+                {% csrf_token %}
+                <button class="submit-btn-trash" type="submit" title="Supprimer">
+                  <img class="trash" src="{% static 'images/icons/trash.svg' %}" alt="trash icon" width="24">
+                </button>
+              </form>
+            </div>
+            {% endif %}
+        </div>
+           <!-- Section des likes -->
+        <div class="post_actions">
+          {% if user.is_authenticated %}
+            <button class="like-btn" data-post-id="{{ post.id }}" data-liked="false">
+              <span class="like-icon">🤍</span>
+              <span class="like-count">{{ post.get_likes_count }}</span>
+            </button>
+          {% else %}
+            <span class="like-display">
+              <span class="like-icon">🤍</span>
+              <span class="like-count">{{ post.get_likes_count }}</span>
+            </span>
+          {% endif %}
+        </div>
+      </article>
     {% endfor %} {% else %}
     <p>Aucun post pour cet utilisateur.</p>
     {% endif %}
@@ -75,11 +74,19 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const likeButtons = document.querySelectorAll('.like-btn');
-    
+
+    document.querySelectorAll('.post_container').forEach(el => {
+      el.addEventListener('click', function(e) {
+        if (e.target.closest('button, a')) return;
+        window.location.href = el.dataset.href;
+      });
+    });
+
+
     // Charger l'état initial des likes pour chaque bouton
     likeButtons.forEach(button => {
         const postId = button.dataset.postId;
-        
+
         // Récupérer l'état initial
         fetch(`/blog/like-status/${postId}/`, {
             method: 'GET',
@@ -88,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 const icon = button.querySelector('.like-icon');
                 const count = button.querySelector('.like-count');
-                
+
                 if (data.liked) {
                     icon.textContent = '💙';
                     button.dataset.liked = 'true';
@@ -101,11 +108,11 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Erreur lors du chargement de l\'état des likes:', error);
             });
-        
+
         // Gérer les clics
         button.addEventListener('click', function() {
             const postId = this.dataset.postId;
-            
+
             fetch(`/blog/like/${postId}/`, {
                 method: 'POST',
                 headers: {
@@ -118,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Mettre à jour l'icône
                 const icon = this.querySelector('.like-icon');
                 const count = this.querySelector('.like-count');
-                
+
                 if (data.liked) {
                     icon.textContent = '💙';
                     this.dataset.liked = 'true';
@@ -126,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     icon.textContent = '🤍';
                     this.dataset.liked = 'false';
                 }
-                
+
                 // Mettre à jour le compteur
                 count.textContent = data.likes_count;
             })

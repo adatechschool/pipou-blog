@@ -1,4 +1,4 @@
-                                  -*   PipouBlog  *-
+                                  -*  <b> PipouBlog </b> *-
 
 -- Description --
 
@@ -24,8 +24,8 @@ Pour des informations détaillées, consultez les notices suivantes :
 
 Clonez le dépôt et accédez au répertoire du projet :
 
--*  git clone git@github.com:adatechschool/pipou-blog.git  *-
-** cd PipouBlog/pipou-blog
+``` git clone git@github.com:adatechschool/pipou-blog.git ```
+``` cd PipouBlog/pipou-blog ```
 
 
 
@@ -36,22 +36,22 @@ Clonez le dépôt et accédez au répertoire du projet :
 
 2 - Construisez et lancez les services (incluant la base de données PostgreSQL) :
 
-** docker-compose up --build
+``` docker-compose up --build ```
 
 
 3 - Appliquez les migrations pour configurer la base de données :
 
-** docker-compose exec server python manage.py migrate
+``` docker-compose exec server python manage.py migrate ```
 
 
 4 - (Optionnel) Créez un superutilisateur pour accéder à l'interface d'administration :
 
-** docker-compose exec server python manage.py createsuperuser
+``` docker-compose exec server python manage.py createsuperuser ```
 
 
 5 - (Optionnel) Chargez les données de démonstration :
 
-** docker-compose exec server python manage.py loaddata fixtures/all_data.json
+``` docker-compose exec server python manage.py loaddata fixtures/all_data.json ```
 
 
 6 - L'application est accessible à : http://localhost:8000.
@@ -59,7 +59,7 @@ Clonez le dépôt et accédez au répertoire du projet :
 
 7 - L'interface d'administration est disponible à : http://localhost:8000/admin.
 
-Pour des instructions détaillées sur la configuration Docker, consultez NOTICE.docker.md et NOTICE.Init.md.
+<i> Pour des instructions détaillées sur la configuration Docker, consultez <b>NOTICE.docker.md</b> et <b> NOTICE.Init.md</b> </i>.
 
 
 
@@ -68,24 +68,24 @@ Pour des instructions détaillées sur la configuration Docker, consultez NOTICE
 
 1 - Construisez l'image Docker :
 
-** docker build -t pipoublog .
+``` docker build -t pipoublog ```
 
 Si votre cloud utilise une architecture différente (par exemple, amd64 pour un Mac M1) :
 
-** docker build --platform=linux/amd64 -t pipoublog .
+``` docker build --platform=linux/amd64 -t pipoublog ```
 
 
 2 - Poussez l'image vers votre registre :
 
-** docker push myregistry.com/pipoublog
+``` docker push myregistry.com/pipoublog ```
 
-Pour plus de détails, consultez NOTICE.docker.md ou la documentation officielle de Docker.
+Pour plus de détails, consultez <b>NOTICE.docker.md</b> ou la documentation officielle de Docker.
 
 
 
 -- Tests --
 
-Le projet inclut une suite de tests automatisés avec une couverture de 96%. Pour exécuter les tests localement ou configurer l'intégration continue avec GitHub Actions, consultez NOTICE.test.md.
+Le projet inclut une suite de tests automatisés avec une couverture de 96%. Pour exécuter les tests localement ou configurer l'intégration continue avec GitHub Actions, consultez <b>NOTICE.test.md.</b>
 
 -- Structure du projet
 
@@ -120,7 +120,7 @@ pipou-blog/
 4 - Poussez vers la branche.
 5 - Ouvrez une Pull Request.
 
-Pour plus de détails, consultez NOTICE.Init.md.
+Pour plus de détails, consultez <b>NOTICE.Init.md</b>.
 
 
 

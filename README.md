@@ -24,7 +24,7 @@ Pour des informations détaillées, consultez les notices suivantes :
 
 Clonez le dépôt et accédez au répertoire du projet :
 
--* git clone git@github.com:adatechschool/pipou-blog.git *-
+-*  git clone git@github.com:adatechschool/pipou-blog.git  *-
 ** cd PipouBlog/pipou-blog
 
 

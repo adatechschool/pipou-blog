@@ -1,4 +1,4 @@
-                                  -  <b>PipouBlog</b> -
+                                  -*  PipouBlog *-
 
 -- Description --
 
@@ -93,13 +93,13 @@ pipou-blog/
 ├── pipou_blog/           # Configuration Django
 ├── blog/                 # Application blog
 ├── authentication/       # Application authentification
-├── user_profile/        # Application profils utilisateur
-├── static/              # Fichiers statiques (CSS, JS, images)
-├── templates/           # Templates HTML
-├── fixtures/            # Données de démonstration
-├── requirements.txt     # Dépendances Python
-├── compose.yaml         # Configuration Docker
-└── manage.py            # Script de gestion Django
+├── user_profile/         # Application profils utilisateur
+├── static/               # Fichiers statiques (CSS, JS, images)
+├── templates/            # Templates HTML
+├── fixtures/             # Données de démonstration
+├── requirements.txt      # Dépendances Python
+├── compose.yaml          # Configuration Docker
+└── manage.py             # Script de gestion Django
 
 -- Fonctionnalités principales --
 
@@ -114,11 +114,11 @@ pipou-blog/
 
 -- Contribution --
 
-1 - Forkez le projet.
-2 - Créez une branche pour votre fonctionnalité.
-3 - Committez vos changements.
-4 - Poussez vers la branche.
-5 - Ouvrez une Pull Request.
+1 - Forkez le projet.</br>
+2 - Créez une branche pour votre fonctionnalité.</br>
+3 - Committez vos changements.</br>
+4 - Poussez vers la branche.</br>
+5 - Ouvrez une Pull Request.</br>
 
 Pour plus de détails, consultez <b>NOTICE.Init.md</b>.
 

@@ -1,4 +1,4 @@
-                                                   -*  PipouBlog *-
+                                             -*  PipouBlog *-
 
 -- Description --
 
@@ -6,9 +6,9 @@ PipouBlog est une application web développée avec Django, conçue pour créer,
 
 Pour des informations détaillées, consultez les notices suivantes :
 
-- NOTICE.docker.md : Instructions pour construire, exécuter et déployer avec Docker.
-- NOTICE.Init.md : Guide pour l'initialisation et la configuration du projet.
-- NOTICE.test.md : Instructions pour exécuter les tests.
+- <b>NOTICE.docker.md</b> : Instructions pour construire, exécuter et déployer avec Docker.
+- <b>NOTICE.Init.md</b> : Guide pour l'initialisation et la configuration du projet.
+- <b>NOTICE.test.md</b> : Instructions pour exécuter les tests.
 
 
 
